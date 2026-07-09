@@ -1,0 +1,6 @@
+{
+  "name": "WhenMen Inc.",
+  "description": "The complete, highly-polished faith-based website for WhenMen Inc. brotherhood, including all program pages, story hubs, events, resources, and get-involved integrations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

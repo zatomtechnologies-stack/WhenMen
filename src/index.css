@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Premium Custom Color Palette (Easy to change here!) */
+  --color-brand-maroon-50: #faf2f3;
+  --color-brand-maroon-100: #f4e3e6;
+  --color-brand-maroon-200: #eacbd1;
+  --color-brand-maroon-500: #800020; /* Primary Deep Burgundy */
+  --color-brand-maroon-600: #6b001a;
+  --color-brand-maroon-700: #540014;
+  --color-brand-maroon-900: #2a000a;
+
+  --color-brand-gold-50: #fefbf0;
+  --color-brand-gold-100: #fdf5d6;
+  --color-brand-gold-500: #d4af37; /* Metallic Warm Gold Accent */
+  --color-brand-gold-600: #b59227;
+  --color-brand-gold-700: #8c6f1c;
+
+  --color-brand-dark-bg: #0f0a0c; /* Luxurious extremely dark crimson black */
+  --color-brand-neutral-bg: #faf9f6; /* Classic warm gallery background */
+  --color-brand-neutral-card: #ffffff;
+  --color-brand-neutral-dark: #121011; /* Soft coal text */
+}
+
+/* Custom classes for layout or animations */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-brand-maroon-500) 0%, var(--color-brand-maroon-700) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body {
+  background-color: var(--color-brand-neutral-bg);
+  color: var(--color-brand-neutral-dark);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Simple keyframe fade for page switches */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-transition {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
