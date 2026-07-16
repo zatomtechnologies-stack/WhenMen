@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Mail, Phone, MapPin, ShieldAlert, Instagram, Facebook, Youtube, Play } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Facebook, Youtube } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (path: string) => void;
@@ -16,18 +16,12 @@ export default function Footer({ onNavigate }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* Column 1: Logo & Tagline */}
         <div id="footer-col-1" className="space-y-4">
-          <div className="flex items-center gap-2 cursor-pointer group" onClick={() => handleLinkClick('/')}>
-            <div className="bg-brand-maroon-500 text-brand-gold-500 p-2 rounded border border-brand-gold-500/20 group-hover:bg-brand-maroon-600 transition-all">
-              <Shield className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="font-display font-extrabold text-lg tracking-wider text-white">
-                WHEN<span className="text-brand-gold-500">MEN</span>
-              </span>
-              <span className="block text-[8px] uppercase tracking-widest text-brand-maroon-100/50 -mt-1">
-                Inc. Brotherhood
-              </span>
-            </div>
+          <div className="flex items-center cursor-pointer group" onClick={() => handleLinkClick('/')}>
+            <img
+              src="/WhenMen.png"
+              alt="WhenMen Inc."
+              className="h-10 w-auto object-contain"
+            />
           </div>
           <p className="text-sm leading-relaxed text-gray-300">
             A movement of men praying, worshipping, and transforming families, communities, and generations for the glory of God.

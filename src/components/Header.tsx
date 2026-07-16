@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Shield, ChevronRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronRight, ChevronDown } from 'lucide-react';
 
 interface HeaderProps {
   currentPath: string;
@@ -79,19 +79,13 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
           <div
             id="header-logo"
             onClick={() => handleLinkClick('/')}
-            className="flex items-center gap-2 cursor-pointer group"
+            className="flex items-center cursor-pointer group"
           >
-            <div className="bg-brand-maroon-500 text-brand-gold-500 p-2 rounded-lg border border-brand-gold-500/30 group-hover:bg-brand-maroon-600 transition-colors">
-              <Shield className="w-6 h-6 animate-pulse" />
-            </div>
-            <div>
-              <span className="font-display font-extrabold text-xl tracking-wider text-white">
-                WHEN<span className="text-brand-gold-500">MEN</span>
-              </span>
-              <span className="block text-[9px] uppercase tracking-widest text-brand-maroon-100/70 -mt-1">
-                Inc. Brotherhood
-              </span>
-            </div>
+            <img
+              src="/WhenMen.png"
+              alt="WhenMen Inc."
+              className="h-10 w-auto object-contain"
+            />
           </div>
 
           {/* Desktop Navigation */}
