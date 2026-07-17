@@ -41,12 +41,18 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
         { name: 'Youth & Next Gen', path: '/programs?id=youth' },
       ]
     },
-    { name: 'Stories', path: '/stories' },
-    { name: 'Events', path: '/events' },
+    {
+      name: 'Community',
+      path: '/stories',
+      submenu: [
+        { name: 'Stories', path: '/stories' },
+        { name: 'Events', path: '/events' },
+        { name: 'Resources', path: '/resources' },
+        { name: 'Contact Us', path: '/contact' },
+      ]
+    },
     { name: 'Join Us', path: '/join' },
     { name: 'Give', path: '/give' },
-    { name: 'Resources', path: '/resources' },
-    { name: 'Contact', path: '/contact' },
   ];
 
   const handleLinkClick = (path: string) => {
@@ -94,7 +100,8 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
               const hasSubmenu = !!item.submenu;
               const isActive = currentPath === item.path || 
                 (item.path === '/' && (currentPath === '' || currentPath === '/')) ||
-                (item.path !== '/' && currentPath.startsWith(item.path));
+                (item.path !== '/' && currentPath.startsWith(item.path)) ||
+                (item.submenu?.some(sub => currentPath.startsWith(sub.path.split('?')[0])) ?? false);
 
               if (hasSubmenu) {
                 return (
@@ -187,7 +194,8 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
             const hasSubmenu = !!item.submenu;
             const isActive = currentPath === item.path || 
               (item.path === '/' && (currentPath === '' || currentPath === '/')) ||
-              (item.path !== '/' && currentPath.startsWith(item.path));
+              (item.path !== '/' && currentPath.startsWith(item.path)) ||
+              (item.submenu?.some(sub => currentPath.startsWith(sub.path.split('?')[0])) ?? false);
             const isExpanded = expandedMobileMenu === item.name;
 
             return (
