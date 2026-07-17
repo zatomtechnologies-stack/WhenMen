@@ -81,11 +81,11 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo — left */}
           <div
             id="header-logo"
             onClick={() => handleLinkClick('/')}
-            className="flex items-center cursor-pointer group"
+            className="flex items-center cursor-pointer group flex-shrink-0"
           >
             <img
               src="/WhenMen.png"
@@ -94,8 +94,8 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
             />
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden xl:flex items-center gap-1">
+          {/* Desktop Navigation — centered absolutely */}
+          <nav className="hidden xl:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => {
               const hasSubmenu = !!item.submenu;
               const isActive = currentPath === item.path || 
@@ -156,15 +156,19 @@ export default function Header({ currentPath, onNavigate }: HeaderProps) {
                 </button>
               );
             })}
+          </nav>
+
+          {/* CTA — right */}
+          <div className="hidden xl:flex items-center flex-shrink-0">
             <button
               id="header-cta"
               onClick={() => handleLinkClick('/give')}
-              className="ml-4 px-4 py-2 bg-gradient-to-r from-brand-maroon-500 to-brand-maroon-600 text-white font-medium text-sm rounded-md border border-brand-gold-500/40 hover:from-brand-maroon-600 hover:to-brand-maroon-700 shadow-md hover:shadow-brand-maroon-500/25 transition-all flex items-center gap-1 cursor-pointer"
+              className="px-4 py-2 bg-gradient-to-r from-brand-maroon-500 to-brand-maroon-600 text-white font-medium text-sm rounded-md border border-brand-gold-500/40 hover:from-brand-maroon-600 hover:to-brand-maroon-700 shadow-md hover:shadow-brand-maroon-500/25 transition-all flex items-center gap-1 cursor-pointer"
             >
               Partner with Us
               <ChevronRight className="w-4 h-4" />
             </button>
-          </nav>
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="xl:hidden flex items-center">

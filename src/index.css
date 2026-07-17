@@ -7,21 +7,21 @@
   --font-mono: "JetBrains Mono", monospace;
 
   /* Premium Custom Color Palette (Easy to change here!) */
-  --color-brand-maroon-50: #faf2f3;
-  --color-brand-maroon-100: #f4e3e6;
-  --color-brand-maroon-200: #eacbd1;
-  --color-brand-maroon-500: #800020; /* Primary Deep Burgundy */
-  --color-brand-maroon-600: #6b001a;
-  --color-brand-maroon-700: #540014;
-  --color-brand-maroon-900: #2a000a;
+  --color-brand-maroon-50:  #fff6e6;
+  --color-brand-maroon-100: #fde8ba;
+  --color-brand-maroon-200: #fad48a;
+  --color-brand-maroon-500: #eb8e09; /* Primary Brand Orange-Gold */
+  --color-brand-maroon-600: #c97808;
+  --color-brand-maroon-700: #9e5e06;
+  --color-brand-maroon-900: #5a3503;
 
-  --color-brand-gold-50: #fff8ed;
+  --color-brand-gold-50:  #fff8ed;
   --color-brand-gold-100: #ffefd0;
   --color-brand-gold-500: #eb8e09; /* Brand Orange-Gold */
   --color-brand-gold-600: #c97808;
   --color-brand-gold-700: #9e5e06;
 
-  --color-brand-dark-bg: #0f0a0c; /* Luxurious extremely dark crimson black */
+  --color-brand-dark-bg: #0d0d0d; /* Deep neutral dark */
   --color-brand-neutral-bg: #faf9f6; /* Classic warm gallery background */
   --color-brand-neutral-card: #ffffff;
   --color-brand-neutral-dark: #121011; /* Soft coal text */

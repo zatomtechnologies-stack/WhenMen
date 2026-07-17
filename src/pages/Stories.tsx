@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Play, Sparkles, MessageSquare, Camera, CheckCircle, Flame, Heart } from 'lucide-react';
+import { Play, MessageSquare, Camera, CheckCircle, Heart, X } from 'lucide-react';
 import { TESTIMONIALS, BY_THE_NUMBERS_STATS } from '../data';
 import { motion } from 'motion/react';
 
@@ -7,6 +7,7 @@ export default function Stories() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', location: '', text: '' });
+  const [showModal, setShowModal] = useState(false);
 
   // Mock Gallery Photos with Categories
   const galleryItems = [
@@ -29,12 +30,140 @@ export default function Stories() {
       setTimeout(() => {
         setFormData({ name: '', email: '', location: '', text: '' });
         setSubmitSuccess(false);
-      }, 5000);
+        setShowModal(false);
+      }, 4000);
     }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSubmitSuccess(false);
+    setFormData({ name: '', email: '', location: '', text: '' });
   };
 
   return (
     <div id="stories-page-container" className="page-transition">
+
+      {/* SHARE YOUR STORY MODAL */}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="story-modal-title"
+        >
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={closeModal}
+          />
+
+          {/* Modal Panel */}
+          <div className="relative z-10 w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
+            {/* Modal Header */}
+            <div className="bg-brand-maroon-500 px-8 py-6 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <MessageSquare className="w-5 h-5 text-brand-gold-500" />
+                <h2 id="story-modal-title" className="font-display font-bold text-xl text-white">
+                  Share Your Story
+                </h2>
+              </div>
+              <button
+                onClick={closeModal}
+                aria-label="Close modal"
+                className="text-white/70 hover:text-white transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-8 py-7">
+              {submitSuccess ? (
+                <div className="py-8 flex flex-col items-center gap-3 text-center">
+                  <CheckCircle className="w-12 h-12 text-emerald-500" />
+                  <p className="font-display font-bold text-lg text-brand-neutral-dark">
+                    Thank You, Brother!
+                  </p>
+                  <p className="text-sm text-gray-500 max-w-sm">
+                    Your testimony has been submitted to our team. We'll review it and reach out soon.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <p className="text-xs text-gray-500 leading-relaxed mb-6">
+                    Has WHENMEN INC. played a role in your spiritual or family restoration? Lock shields with other men by sharing your testimony.
+                  </p>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Your Name *</label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          placeholder="e.g. David R."
+                          className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-maroon-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Your Location *</label>
+                        <input
+                          type="text"
+                          required
+                          value={formData.location}
+                          onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                          placeholder="e.g. Houston, TX"
+                          className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-maroon-500"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Email Address (Kept Confidential) *</label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="e.g. david@example.com"
+                        className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-maroon-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Your Testimony *</label>
+                      <textarea
+                        required
+                        rows={4}
+                        value={formData.text}
+                        onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+                        placeholder="Describe how God transformed your life, family, or leadership through this brotherhood..."
+                        className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-maroon-500 resize-none"
+                      />
+                    </div>
+                    <div className="flex gap-3 pt-1">
+                      <button
+                        type="button"
+                        onClick={closeModal}
+                        className="flex-1 py-2.5 rounded-lg border border-gray-300 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="flex-1 py-2.5 bg-brand-maroon-500 hover:bg-brand-maroon-600 text-white font-bold rounded-lg text-sm transition-colors cursor-pointer"
+                      >
+                        Submit My Testimony
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* SECTION 1: HERO */}
       <motion.section 
         initial={{ opacity: 0 }}
@@ -63,6 +192,16 @@ export default function Stories() {
           <p className="font-sans text-base sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Every single transformed man becomes a powerful catalyst for transformation in his home, workplace, church, and community.
           </p>
+          {/* CTA to open modal */}
+          <div className="pt-4">
+            <button
+              onClick={() => setShowModal(true)}
+              className="inline-flex items-center gap-2 px-7 py-3 bg-brand-gold-500 hover:bg-brand-gold-600 text-white font-bold rounded-lg text-sm shadow-lg transition-all cursor-pointer"
+            >
+              <MessageSquare className="w-4 h-4" />
+              Share Your Story
+            </button>
+          </div>
         </div>
       </motion.section>
 
@@ -113,7 +252,7 @@ export default function Stories() {
             </h2>
             <div className="w-12 h-1 bg-brand-gold-500 mx-auto rounded-full"></div>
             <p className="text-gray-500 text-sm max-w-2xl mx-auto font-sans leading-relaxed">
-              Our prayer gatherings, worship experiences, mentorship initiatives, and outreach efforts are helping men grow spiritually, restore families, overcome addiction, heal emotionally, and discover God\'s plan.
+              Our prayer gatherings, worship experiences, mentorship initiatives, and outreach efforts are helping men grow spiritually, restore families, overcome addiction, heal emotionally, and discover God's plan.
             </p>
           </div>
 
@@ -144,79 +283,22 @@ export default function Stories() {
             ))}
           </div>
 
-          {/* Submit Your Story Interactive Form */}
-          <div className="max-w-2xl mx-auto bg-brand-neutral-bg border border-gray-200 rounded-3xl p-8 sm:p-10 shadow-sm mt-16">
-            <div className="text-center space-y-2 mb-8">
-              <MessageSquare className="w-8 h-8 text-brand-maroon-500 mx-auto" />
-              <h3 className="font-display font-bold text-2xl text-brand-neutral-dark">
-                Submit Your Story
-              </h3>
-              <p className="text-xs text-gray-500 leading-relaxed max-w-md mx-auto">
-                Has WHENMEN INC. played a role in your spiritual or family restoration? Lock shields with other men by sharing your testimony.
-              </p>
-            </div>
-
-            {submitSuccess ? (
-              <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-center text-sm flex items-center justify-center gap-2">
-                <CheckCircle className="w-5 h-5 text-emerald-600" />
-                <span>Thank you, your story has been submitted successfully to our coordination team.</span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Your Name *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. David R."
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-maroon-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Your Location *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.location}
-                      onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                      placeholder="e.g. Houston, TX"
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-maroon-500"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Email Address (Keep Confidential) *</label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="e.g. david@example.com"
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-maroon-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Your Testimony Story *</label>
-                  <textarea
-                    required
-                    rows={4}
-                    value={formData.text}
-                    onChange={(e) => setFormData({ ...formData, text: e.target.value })}
-                    placeholder="Describe how God transformed your life, family, or leadership through this brotherhood..."
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-maroon-500"
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-brand-maroon-500 hover:bg-brand-maroon-600 text-white font-bold rounded-lg text-sm transition-colors cursor-pointer"
-                >
-                  Submit My Testimony
-                </button>
-              </form>
-            )}
+          {/* Share Story CTA banner */}
+          <div className="mt-12 rounded-3xl bg-gradient-to-r from-brand-maroon-900 to-brand-maroon-700 px-8 py-10 text-center space-y-4">
+            <MessageSquare className="w-8 h-8 text-brand-gold-500 mx-auto" />
+            <h3 className="font-display font-bold text-2xl text-white">
+              Has God Transformed Your Life Through This Brotherhood?
+            </h3>
+            <p className="text-sm text-gray-300 max-w-md mx-auto">
+              Lock shields with other men by sharing your testimony. Your story could be the one that changes another man's life.
+            </p>
+            <button
+              onClick={() => setShowModal(true)}
+              className="inline-flex items-center gap-2 px-8 py-3 bg-brand-gold-500 hover:bg-brand-gold-600 text-white font-bold rounded-lg text-sm shadow-lg transition-all cursor-pointer mt-2"
+            >
+              <MessageSquare className="w-4 h-4" />
+              Share Your Story
+            </button>
           </div>
         </div>
       </motion.section>
