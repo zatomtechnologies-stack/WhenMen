@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { useLenis, getLenis } from './hooks/useLenis';
+import AdminApp from './dashboard/AdminApp';
 
 // Pages
 import Home from './pages/Home';
@@ -27,21 +28,22 @@ export default function App() {
     const handleLocationChange = () => {
       const pathAndSearch = window.location.pathname + window.location.search;
       setCurrentPath(pathAndSearch || '/');
-      
-      // Keep selectedProgramId in sync if they navigate away
       if (!window.location.pathname.startsWith('/programs')) {
         setSelectedProgramId(null);
       }
     };
-
     window.addEventListener('popstate', handleLocationChange);
     window.addEventListener('pushstate-change', handleLocationChange);
-
     return () => {
       window.removeEventListener('popstate', handleLocationChange);
       window.removeEventListener('pushstate-change', handleLocationChange);
     };
   }, []);
+
+  // ── Admin routes — bypass public Header/Footer entirely ──
+  if (currentPath.startsWith('/admin')) {
+    return <AdminApp />;
+  }
 
   const handleNavigate = (path: string) => {
     // Gracefully clean up any legacy hash-based paths passed in
