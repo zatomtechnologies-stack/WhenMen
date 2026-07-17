@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { useLenis, getLenis } from './hooks/useLenis';
 
 // Pages
 import Home from './pages/Home';
@@ -18,6 +19,9 @@ import Legal from './pages/Legal';
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname + window.location.search || '/');
   const [selectedProgramId, setSelectedProgramId] = useState<string | null>(null);
+
+  // Init Lenis smooth scroll + GSAP ScrollTrigger sync
+  useLenis();
 
   useEffect(() => {
     const handleLocationChange = () => {
@@ -53,8 +57,14 @@ export default function App() {
     
     // Notify window of the location state change
     window.dispatchEvent(new Event('pushstate-change'));
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Use Lenis smooth scroll to top if available, otherwise native
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: false, duration: 1.2 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const handleSelectProgram = (id: string) => {
