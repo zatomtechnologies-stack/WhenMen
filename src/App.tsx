@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { useLenis, getLenis } from './hooks/useLenis';
 import AdminApp from './dashboard/AdminApp';
+import ChatWidget from './components/chat/ChatWidget';
 
 // Pages
 import Home from './pages/Home';
@@ -149,6 +150,9 @@ export default function App() {
 
       {/* Persisted Footer */}
       <Footer onNavigate={handleNavigate} />
+
+      {/* Global Chat Widget */}
+      <ChatWidget onNavigate={handleNavigate} />
     </div>
   );
 }
