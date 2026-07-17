@@ -215,7 +215,7 @@ export default function Events() {
         viewport={{ once: false, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         id="recurring-events" 
-        className="py-20 bg-brand-neutral-bg border-t border-gray-150"
+        className="py-20 bg-brand-neutral-bg"
       >
         <div className="max-w-5xl mx-auto px-4 space-y-12">
           <div className="text-center space-y-3">

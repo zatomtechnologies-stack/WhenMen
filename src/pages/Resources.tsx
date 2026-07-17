@@ -384,7 +384,7 @@ export default function Resources({ onNavigate }: ResourcesProps = {}) {
                       <div>
                         <span className="block text-[10px] text-brand-gold-500 uppercase font-mono tracking-widest">LATEST RECORDING EP-42</span>
                         <h4 className="font-display font-bold text-sm text-white">Anchoring Your Shield in Times of Siege</h4>
-                        <p className="text-[11px] text-gray-400 mt-0.5">Duration: 28 mins | Speaker: John Doe</p>
+                        <p className="text-[11px] text-gray-400 mt-0.5">Duration: 28 mins | Speaker: Pastor Lani Akinyode</p>
                       </div>
                     </div>
                   </div>

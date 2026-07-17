@@ -290,7 +290,7 @@ Many men associate prayer with passive compliance, but biblically, it is an act 
 Do not walk this path alone. Join our 6:00 AM CST Morning Zoom Prayers where hundreds of brothers stand in agreement daily.`,
     category: 'Prayer',
     date: 'June 28, 2026',
-    author: 'Pastor John Doe',
+    author: 'Pastor Lani Akinyode',
     readTime: '5 min read',
     imageUrl: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop'
   },
@@ -430,7 +430,7 @@ export const FAQS: FAQItem[] = [
 export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'tm1',
-    name: 'John Doe',
+    name: 'Pastor Lani Akinyode',
     title: 'Founder & President',
     bio: 'A pastor, speaker, and entrepreneur with over 20 years of men\'s ministry experience and a burning passion to raise a generation of praying men.',
     socials: { linkedin: '#', twitter: '#' }

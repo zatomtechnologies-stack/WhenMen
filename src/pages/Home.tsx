@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import { useScrollReveal, useParallax } from '../hooks/useScrollReveal';
+import { motion } from 'motion/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,19 +118,23 @@ export default function Home({ onNavigate, onSelectProgram }: HomeProps) {
         </div>
       )}
 
-      {/* SECTION 1: VIDEO HERO (Full Viewport) */}
-      <section id="hero-section" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-brand-dark-bg">
-        {/* Real Looping Ambient Video Background */}
+      {/* SECTION 1: VIDEO HERO — Cinematic Full Viewport */}
+      <section id="hero-section" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-dark-bg">
+
+        {/* ── Parallax video/image background ── */}
         <div className="absolute inset-0 z-0" ref={parallaxBgRef}>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-brand-dark-bg/65 to-brand-dark-bg z-10"></div>
-          
+          {/* Layered gradients for cinematic depth */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-brand-dark-bg z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 z-10 pointer-events-none" />
+
+          {/* Fallback image */}
           <img
             src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&q=80&w=1920"
             referrerPolicy="no-referrer"
-            alt="Gathering around fire fallback"
-            className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+            alt="Brotherhood gathering"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           />
-
+          {/* Ambient video */}
           <video
             ref={videoRef}
             autoPlay
@@ -137,78 +142,164 @@ export default function Home({ onNavigate, onSelectProgram }: HomeProps) {
             muted={isMuted}
             playsInline
             poster="https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&q=80&w=1920"
-            className="absolute inset-0 w-full h-full object-cover opacity-25"
+            className="absolute inset-0 w-full h-full object-cover opacity-50"
             src="https://assets.mixkit.co/videos/preview/mixkit-fire-flame-background-loop-41712-large.mp4"
           />
-
-          <div className="w-full h-full object-cover scale-105 opacity-25 bg-[radial-gradient(ellipse_at_top,rgba(235,142,9,0.15)_0%,transparent_80%)] flex items-center justify-center relative z-0">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-maroon-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-gold-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-            <div className="grid grid-cols-6 gap-4 p-8 w-full max-w-5xl opacity-10 select-none pointer-events-none">
-              {Array.from({ length: 24 }).map((_, i) => (
-                <div key={i} className="border border-brand-gold-500/20 rounded p-4 text-center text-[10px] font-mono text-brand-gold-500">
-                  WHENMEN #{i + 100}
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
-        {/* Video Controls */}
-        <div id="hero-video-controls" className="absolute bottom-6 right-6 z-20 flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 text-white text-xs select-none">
-          <button onClick={() => setIsPlaying(!isPlaying)} className="hover:text-brand-gold-500 transition-colors flex items-center gap-1 cursor-pointer">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-            {isPlaying ? 'Looping Ambient Video' : 'Paused'}
-          </button>
-          <span className="text-white/20">|</span>
-          <button onClick={() => setIsMuted(!isMuted)} className="hover:text-brand-gold-500 transition-colors flex items-center gap-1 cursor-pointer">
-            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-            {isMuted ? 'Muted' : 'Sound On'}
-          </button>
+        {/* ── Animated ambient glows ── */}
+        <div className="absolute inset-0 z-[1] pointer-events-none overflow-hidden">
+          <motion.div
+            animate={{ scale: [1, 1.15, 1], opacity: [0.06, 0.12, 0.06] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-brand-gold-500 blur-[140px]"
+          />
+          <motion.div
+            animate={{ scale: [1.1, 1, 1.1], opacity: [0.04, 0.09, 0.04] }}
+            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 2.5 }}
+            className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full bg-brand-maroon-500 blur-[120px]"
+          />
+          {/* Center radial */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(235,142,9,0.07)_0%,transparent_100%)]" />
         </div>
 
-        {/* Hero Text Content */}
-        <div ref={heroTextRef} className="relative z-10 max-w-5xl mx-auto px-4 text-center mt-6">
-          <div data-hero className="inline-flex items-center gap-2 bg-brand-maroon-500/20 border border-brand-gold-500/30 px-3.5 py-1.5 rounded-full text-brand-gold-500 text-xs font-semibold uppercase tracking-wider mb-8">
+        {/* ── Floating grid texture ── */}
+        <div className="absolute inset-0 z-[1] opacity-[0.04] pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)] bg-[size:60px_60px]" />
+
+        {/* ── Hero text content ── */}
+        <div ref={heroTextRef} className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24 pb-32">
+          {/* Badge */}
+          <motion.div
+            data-hero
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 bg-brand-gold-500/10 border border-brand-gold-500/30 px-4 py-2 rounded-full text-brand-gold-500 text-xs font-bold uppercase tracking-[0.2em] mb-10 backdrop-blur-sm"
+          >
             <Sparkles className="w-3.5 h-3.5" />
             Faith-Based 501(c)(3) Nonprofit Brotherhood
-          </div>
-          <h1 data-hero className="font-display font-extrabold text-4xl sm:text-5xl md:text-7xl tracking-tight text-white mb-6">
-            Every Man Needs a<br className="hidden sm:block" />
-            <span className="text-gradient bg-gradient-to-r from-brand-gold-500 via-brand-maroon-100 to-brand-gold-500 bg-clip-text text-transparent">
-              Brotherhood.
-            </span>{' '}
-            Find Yours.
-          </h1>
-          <p data-hero className="font-sans text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-10">
-            A movement of men praying, worshipping, and transforming families, communities, and generations for the glory of God.
-          </p>
+          </motion.div>
 
-          <div data-hero className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          {/* Main headline — word by word stagger */}
+          <div data-hero className="mb-7 overflow-hidden">
+            <h1 className="font-display font-extrabold text-5xl sm:text-6xl md:text-[5.5rem] lg:text-[6.5rem] tracking-tight text-white leading-[0.92]">
+              {['Every', 'Man', 'Needs', 'a'].map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 60 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-block mr-[0.2em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+              <br />
+              <motion.span
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-brand-gold-500 via-amber-400 to-brand-gold-600"
+              >
+                Brotherhood.
+              </motion.span>
+            </h1>
+          </div>
+
+          {/* Subheadline */}
+          <motion.p
+            data-hero
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.95, ease: 'easeOut' }}
+            className="font-sans text-lg sm:text-xl md:text-2xl text-gray-300/90 max-w-2xl mx-auto leading-relaxed mb-12 font-light"
+          >
+            A movement of men praying, worshipping, and transforming families, communities, and generations for the glory of God.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            data-hero
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="flex flex-col sm:flex-row justify-center items-center gap-4"
+          >
             <button
               id="hero-cta-join"
               onClick={() => onNavigate('/join')}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-maroon-500 to-brand-maroon-600 text-white font-bold rounded-lg border border-brand-gold-500/30 shadow-xl hover:shadow-brand-maroon-500/30 hover:scale-105 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="group w-full sm:w-auto px-9 py-4.5 bg-brand-gold-500 hover:bg-brand-gold-600 text-white font-bold rounded-2xl shadow-2xl shadow-brand-gold-500/30 hover:shadow-brand-gold-500/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer text-base"
             >
               Join the Movement
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
             </button>
             <button
               id="hero-cta-story"
               onClick={() => setShowLightbox(true)}
-              className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-lg border border-white/10 hover:border-brand-gold-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="group w-full sm:w-auto px-9 py-4.5 bg-white/8 hover:bg-white/15 text-white font-semibold rounded-2xl border border-white/20 hover:border-brand-gold-500/40 transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer text-base backdrop-blur-sm"
             >
-              <Play className="w-4 h-4 text-brand-gold-500 fill-brand-gold-500" />
+              <div className="w-8 h-8 rounded-full bg-brand-gold-500/20 border border-brand-gold-500/40 flex items-center justify-center">
+                <Play className="w-3.5 h-3.5 text-brand-gold-500 fill-brand-gold-500 ml-0.5" />
+              </div>
               Watch Our Story
             </button>
-          </div>
+          </motion.div>
 
-          <div data-hero className="mt-16 max-w-3xl mx-auto border-t border-brand-maroon-500/20 pt-8">
-            <p className="font-display font-semibold italic text-brand-gold-100 text-base sm:text-lg leading-relaxed text-center px-4">
-              "When Men Pray, Families Change. When Men Worship, Generations Shift. When Men Rise, Communities Thrive."
+          {/* Pull quote */}
+          <motion.div
+            data-hero
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2, delay: 1.4 }}
+            className="mt-16 pt-8 max-w-2xl mx-auto border-t border-white/10"
+          >
+            <p className="font-display font-medium italic text-white/50 text-sm sm:text-base leading-relaxed tracking-wide">
+              "When Men Pray, Families Change. When Men Worship, Generations Shift.<br className="hidden sm:block" /> When Men Rise, Communities Thrive."
             </p>
-          </div>
+          </motion.div>
         </div>
+
+        {/* ── Video controls — bottom right ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.6 }}
+          id="hero-video-controls"
+          className="absolute bottom-8 right-8 z-20 flex items-center gap-3 bg-black/50 backdrop-blur-md px-4 py-2.5 rounded-full border border-white/10 text-white text-xs select-none"
+        >
+          <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="hover:text-brand-gold-500 transition-colors flex items-center gap-1.5 cursor-pointer"
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-emerald-400 animate-pulse' : 'bg-gray-500'}`} />
+            {isPlaying ? 'Live' : 'Paused'}
+          </button>
+          <span className="text-white/20">|</span>
+          <button
+            onClick={() => setIsMuted(!isMuted)}
+            className="hover:text-brand-gold-500 transition-colors flex items-center gap-1.5 cursor-pointer"
+          >
+            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            {isMuted ? 'Muted' : 'Sound On'}
+          </button>
+        </motion.div>
+
+        {/* ── Mouse scroll indicator — bottom center ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.8 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-6 h-10 rounded-full border-2 border-white/25 flex items-start justify-center pt-2"
+          >
+            <div className="w-1 h-2.5 bg-brand-gold-500 rounded-full" />
+          </motion.div>
+          <span className="text-white/30 text-[10px] uppercase tracking-[0.2em] font-medium">Scroll</span>
+        </motion.div>
+
       </section>
 
       {/* SECTION 2: IMPACT STATS BAR */}

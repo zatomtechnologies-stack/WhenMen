@@ -228,7 +228,7 @@ export default function Join({ currentPath }: JoinProps = {}) {
         viewport={{ once: false, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         id="join-membership" 
-        className="py-20 bg-brand-neutral-bg border-t border-b border-gray-150 relative overflow-hidden bg-[radial-gradient(rgba(128,0,32,0.035)_1.5px,transparent_1.5px)] bg-[size:24px_24px]"
+        className="py-20 bg-brand-neutral-bg relative overflow-hidden bg-[radial-gradient(rgba(128,0,32,0.035)_1.5px,transparent_1.5px)] bg-[size:24px_24px]"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-brand-neutral-bg via-transparent to-brand-neutral-bg pointer-events-none"></div>
         <div className="max-w-3xl mx-auto px-4 relative z-10">
@@ -437,7 +437,7 @@ export default function Join({ currentPath }: JoinProps = {}) {
         viewport={{ once: false, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         id="join-start-chapter" 
-        className="py-20 bg-brand-neutral-bg border-t border-b border-gray-150"
+        className="py-20 bg-brand-neutral-bg"
       >
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-brand-dark-bg text-white p-8 sm:p-12 rounded-3xl border border-brand-gold-500/20 shadow-xl space-y-8">

@@ -253,7 +253,7 @@ export default function Contact() {
             viewport={{ once: false, margin: "-100px" }}
             transition={{ duration: 0.8 }}
             id="confidential-prayer-area" 
-            className="border-t border-gray-200 pt-16"
+            className="pt-16"
           >
             <div className="max-w-3xl mx-auto bg-brand-neutral-bg border border-gray-200 rounded-3xl p-8 sm:p-12 shadow-sm space-y-8">
               <div className="text-center space-y-2">

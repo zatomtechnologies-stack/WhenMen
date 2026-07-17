@@ -310,7 +310,7 @@ export default function Stories() {
         viewport={{ once: false, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         id="stories-videos" 
-        className="py-20 bg-brand-neutral-bg border-t border-b border-gray-150"
+        className="py-20 bg-brand-neutral-bg"
       >
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center space-y-3 mb-12">
